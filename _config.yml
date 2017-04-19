@@ -15,7 +15,8 @@
 # in the templates via {{ site.myvariable }}.
 title: 李芊的笔记本
 email: arthur.liqian@gmail.com
-description: > # 还没想好
+description: > 
+ 还没想好
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: jekyllrb

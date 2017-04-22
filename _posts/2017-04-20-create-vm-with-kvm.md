@@ -1,12 +1,17 @@
-# 使用KVM创建虚拟机
+---
+layout: post
+title:  "使用KVM创建虚拟机"
+date:   2017-04-20 22:55:36 +0800
+categories: KVM
+---
 
-## KVM简介
+# KVM简介
 
 TBD
 
-### 创建无网络的虚拟机
+## 创建无网络的虚拟机
 
-#### 使用条件
+### 使用条件
 
 使用KVM需要首先确认CPU是否支持vmx或者svm特性。在Linux系统下可以使用以下命令来确认：
 
@@ -20,7 +25,7 @@ TBD
 
 如果输出为空，则说明CPU不支持KVM的运行。
 
-#### 包安装
+### 包安装
 
 在RedHat或者CentOS下，使用yum安装必需的包：
 
@@ -57,10 +62,10 @@ TBD
 
         # modprobe kvm-amd
 
-#### 导入现有系统镜像
+### 导入现有磁盘镜像
 
-使用`virt-install`可以导入一个已经安装配置好的系统的镜像文件。导入完成后，这个镜像文件还会作为虚拟机系统运行时的系
-统分区，用于继续保存系统的文件。
+使用`virt-install`可以导入一个已经安装配置好的系统的镜像文件。导入完成后，这个镜像文件还会作
+为虚拟机系统运行时的系统分区，用于继续保存系统的文件。
 
 接下来的例子中，会使用CirrOS镜像文件。CirrOS是一个精简的Linux内核系统，经常用在云平台的测试
 中。CirrOS镜像可以在
@@ -143,3 +148,94 @@ cirros-0.3.5-i386-disk.img 镜像文件信息：
 很多时候，在连接上虚拟机控制台后，就算虚拟机操作系统已经可以访问，也不会显示登陆或者对话提示，这
 时可以输入回车来让系统再次显示登录或者控制台对话提示。比如，上例输出的后两行即CirrOS的登录提示。
 注意，如上面的登录提示所述，CirrOS的默认登录账号和密码是"cirros"和"cubswin:)"。
+
+### 使用光盘镜像安装新系统
+
+除了导入一个已有的磁盘镜像，还可以通过系统安装光盘镜像来安装一个新的虚拟机。
+
+首先，我们需要准备系统安装光盘的镜像文件。比如，可以在
+[https://www.centos.org/download/](https://www.centos.org/download/)
+找到所需的CentOS安装镜像。接下来的例子中，会使用
+[CentOS-7-x86_64-Minimal-1611.iso](http://mirrors.sohu.com/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso)。
+KVM会使用qemu账号来运行虚拟机的模拟进程，所以需要将镜像文件放到qemu账号有权限访问的目录下，比
+如：
+
+    # mv CentOS-7-x86_64-Minimal-1611.iso /tmp/
+
+然后就可以执行以下命令开始虚拟机安装了：
+
+    # virt-install --name centos7 \
+        --ram=1024 \
+        --vcpus=2 \
+        --disk path=/var/lib/libvirt/images/centos7.img,size=10,bus=virtio,format=qcow2 \
+        --accelerate \
+        --vnc --vncport=6001 --vnclisten=0.0.0.0 \
+        --noautoconsole \
+        --cdrom=/tmp/CentOS-7-x86_64-Minimal-1611.iso
+
+这个命令比之前多了一些参数：
+
+- `vcpus` 虚拟机的虚拟CPU内核数量。
+- `disk` 参数中，除了`path`以外，还多了`size`, `bus`和 `format`部分。`size`是虚拟机系统
+    磁盘大小，单位为"GB"。`bus`是磁盘驱动类型，一般为"virtio“。`format`是指磁盘镜像文件的
+    格式，这里同样是"qcow2"。在这个例子中，指定的磁盘镜像文件并不存在，KVM会根据参数自动创建
+    一个新的文件。
+- `vnc` 参数后面多了两个与VNC相关的参数，`vncport`和`vnclisten`。`vncport`指定此虚拟机的
+    VNC服务在当前宿主机上的监听端口。`vnclisten`这里指定的"0.0.0.0"则指虚拟机的VNC服务在宿
+    主机上监听所有IP地址。后面会详细讲解如何根据这两个参数来连接虚拟机的VNC。
+- `cdrom` 指定操作系统安装光盘镜像文件的地址。
+
+由于CentOS默认情况下不会开启TTY，所以此时还不能通过`virsh console`命令来连接虚拟机，而需要
+使用VNC客户端。接下来会用Chrome浏览器的VNC Viewer插件来演示。VNC Viewer插件可以在Chrome浏
+览器的插件市场里找到（需要翻墙）。
+
+根据上例中的VNC相关参数，可以知道新虚拟机的VNC服务是在宿主机的所有IP地址上监听6001端口。如所
+使用的宿主机IP地址为10.0.12.26，那么我们在VNC Viewer上指定VNC指定地址就是10.0.12.16:6001
+, 如下图所示：
+
+ ![VNC Viewer连接]({{ site.url }}/assets/img/vnc_connection.png)
+
+由于没有使用安全链接，在上面的登录窗口点击“Connect”后，如果虚拟机的VNC可以正常访问，会有连接
+未加密的警告提示：
+
+![VNC View连接加密警告]({{ site.url }}/assets/img/vnc_connection_warning.png)
+
+忽略此警告，点击警告窗口上的"Connect"后，就可以看到CentOS的安装窗口了：
+
+![VNC Viewer安装CentOS窗口]({{ site.url }}/assets/img/vnc_centos_install.png)
+
+接下来就可以安装一般安装CentOS的方式进行后续的安装操作了。
+
+系统安装最后安装程序会尝试自动重启，此时有可能虚拟机关机后不会自动启动，需要我们手动启动。
+
+首先，我们可以通过`virsh list --all`命令查看虚拟机状态，如果发现的确虚拟机状态为`shut down`
+就可以使用`virsh start`命令来手动启动：
+
+    # virsh start centos7
+
+命令中的参数`centos7`是我们安装虚拟机时指定的虚拟机名字。
+
+默认情况下，CentOS是不开启ttyS0的，我们需要手动配置和启用，否则无法通过`virsh console`命令
+来访问。
+
+首先，修改配置文件`/etc/sysconfig/grub`，在`GRUB_CMD_LINELINUX`中添加
+`console=ttyS0`, 如：
+
+{% highlight shell linenos %}
+GRUB_TIMEOUT=5
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="rd.lvm.lv=centos/root rd.lvm.lv=centos/swap crashkernel=auto rhgb quiet console=ttyS0"
+GRUB_DISABLE_RECOVERY="true"
+{% endhighlight %}
+
+中的第5行最后部分。
+
+接下来执行以下命令来设置并启用ttyS0：
+
+    # stty -F /dev/ttyS0 speed 9600
+    # grub2-mkconfig -o /boot/grub2/grub.cfg
+    # systemctl start serial-getty@ttyS0
+
+这样，就可以通过`virsh console`来连接虚拟机了。

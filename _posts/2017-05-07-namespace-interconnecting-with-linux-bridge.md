@@ -2,7 +2,7 @@
 layout: post
 title:  "Namespace网络互联-使用Linux Bridge"
 date:   2017-05-07 14:25:36 +0800
-categories: Linx Network "Linux Bridge"
+categories: network
 ---
 
 # 概览

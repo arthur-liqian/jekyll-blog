@@ -675,7 +675,7 @@ Linux Bridge相关的概念和操作可以参考以下一些文档：
 
 本文中，主要使用iproute2工具来对网络设备进行操作。关于这个工具，一个比较完整的文档是：
 
-[Baturin's iproute2 Doc](http://baturin.org/docs/iproute2/)
+- [Baturin's iproute2 Doc](http://baturin.org/docs/iproute2/)
 
 `brctl`是一个用来专门对Linux Bridge进行管理和操作的工具。它的使用非常广泛，文档众多，使用方法
 和iproute2的相关命令很类似。本文不再展示具体例子，以及文档链接。

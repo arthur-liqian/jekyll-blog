@@ -155,3 +155,11 @@ availability bottle neck of the system emmploying it.
 
 - Ongoing. Reading the book, and should setup a RabbitMQ cluster following the
     instructions in the book. The performance and stability should be evaluated.
+
+#### Related Task
+
+- System administration and cluster management tools, such as Puppet, Ansible,
+    Chef, Salt.
+- System [Federation](https://en.wikipedia.org/wiki/Federation_(information_technology))
+    such as [Federated Datdabase](https://en.wikipedia.org/wiki/Federated_database_system)
+- Monitor tools, like Nagios, Munin, Zabbix

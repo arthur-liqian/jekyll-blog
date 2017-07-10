@@ -7,9 +7,13 @@ channel = connection.channel()
 
 channel.queue_declare(queue='hello')
 
-channel.basic_publish(exchange='', routing_key='hello', body='hello world')
+def callback(channel, method, properties, body):
+	print "Received %s" % body
 
-connection.close()
 
-print "Send 'hello world'"
+channel.basic_consume(callback, queue='hello', no_ack=True)
 
+
+print "Waiting for messages." 
+
+channel.start_consuming()

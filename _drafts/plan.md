@@ -141,7 +141,8 @@ database, message queue. They would be moved to a separated suject.
 
 ### RabbitMQ
 
-Read [Mastering RabbitMQ](https://www.packtpub.com/application-development/mastering-rabbitmq)
+- Read [Mastering RabbitMQ](https://www.packtpub.com/application-development/mastering-rabbitmq)
+- Go through [RabbitMQ Official Document](http://www.rabbitmq.com/documentation.html)
 
 #### Priority
 
@@ -153,8 +154,12 @@ availability bottle neck of the system emmploying it.
 
 #### Status
 
-- Ongoing. Reading the book, and should setup a RabbitMQ cluster following the
-    instructions in the book. The performance and stability should be evaluated.
+- __**Done**__. Finished reading the book *Mastering RabbitMQ*. However, this 
+    book doesn't reveal enough information about internal relationships, status,
+    and implementation mechanism. More materials are required.
+- __**Ongoing**__ Go through RabbitMQ official documents. 
+- __**Pending**__ Setup a RabbitMQ cluster following the instructions in the 
+    book. The performance and stability should be evaluated.
 
 #### Related Task
 
@@ -163,3 +168,13 @@ availability bottle neck of the system emmploying it.
 - System [Federation](https://en.wikipedia.org/wiki/Federation_(information_technology))
     such as [Federated Datdabase](https://en.wikipedia.org/wiki/Federated_database_system)
 - Monitor tools, like Nagios, Munin, Zabbix
+- Authentication and security service framework SASL
+- SSL, OpenSSL 
+- The relationship between exchange, channel, and queue is not clearly 
+    described. It is necessary to go through other books and materials to 
+    get the comprehensive understanding. Demo application is also required.
+- The data replication and failover mechanism are not described clearly. More
+    materials are needed.
+- Other messaging protocol, such as [STOMP](https://stomp.github.io/), 
+    [MQTT](http://mqtt.org/)
+- SELinux

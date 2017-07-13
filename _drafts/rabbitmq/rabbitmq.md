@@ -77,3 +77,46 @@ be similar with the following
     pip install pika
 
 # Simple Queue
+
+Setup a RabbitMQ server locally. One process sends message to the default
+exchange which has no name, and messages are routed to a queue named "hello".
+And a process receives and consumes message from "hello" queue.
+
+The code sends one message:
+
+    #!/usr/bin/env python
+
+    from pika import BlockingConnection, ConnectionParameters
+
+    connection = BlockingConnection(ConnectionParameters('localhost'))
+    channel = connection.channel()
+
+    channel.queue_declare(queue='hello')
+
+    channel.basic_publish(exchange='', routing_key='hello', body='hello world')
+
+    connection.close()
+
+    print "Send 'hello world'"
+
+The code receives and consumes message: 
+
+    #!/usr/bin/env python
+    
+    from pika import BlockingConnection, ConnectionParameters
+    
+    connection = BlockingConnection(ConnectionParameters('localhost'))
+    channel = connection.channel()
+    
+    channel.queue_declare(queue='hello')
+    
+    def callback(channel, method, properties, body):
+            print "Received %s" % body
+    
+    
+    channel.basic_consume(callback, queue='hello', no_ack=True)
+    
+    
+    print "Waiting for messages."
+    
+    channel.start_consuming()

@@ -72,7 +72,7 @@ the detail information is required to make the choice in the future.
 
 #### Related Task
 
-- __**Undone**__ Hexagonal Architecture pattern 
+- __**Undone**__ [Hexagonal Architecture pattern](http://alistair.cockburn.us/Hexagonal+architecture)
 
 ### Building Microservices
 

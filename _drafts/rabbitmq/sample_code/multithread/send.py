@@ -5,7 +5,7 @@ from pika import BlockingConnection, ConnectionParameters
 
 connection = BlockingConnection(ConnectionParameters('localhost'))
 exchange = "multithread_exchange"
-router_key = "multithread"
+routing_key = "multithread"
 
 class Sender(Thread):
 

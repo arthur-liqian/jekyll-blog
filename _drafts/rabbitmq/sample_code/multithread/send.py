@@ -32,7 +32,7 @@ class Sender(Thread):
 
         self.log("Finished sending message!")
 
-    def log(message):
+    def log(self, message):
         print "[Sender-%i]\t %s" % (self.id, message)
 
 sender = Sender(1, connection, exchange, routing_key)

@@ -19,6 +19,7 @@ class Sender(Thread):
         self.routing_key = routing_key
 
         self.channel = self.connection.channel()
+	self.channel.exchange_declare(self.exchange)
 
     def run(self):
         self.log("Starts sending message!")

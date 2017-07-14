@@ -27,7 +27,7 @@ class Sender(Thread):
             message = "Message-%i from Sender-%i" % (i, self.id)
 
             self.channel.basic_public(exchange=self.exchange,
-                    routing_key=self.routing_key
+                    routing_key=self.routing_key,
                     body=message)
 
         self.log("Finished sending message!")

@@ -26,7 +26,7 @@ class Sender(Thread):
         for i in range(1000):
             message = "Message-%i from Sender-%i" % (i, self.id)
 
-            self.channel.basic_public(exchange=self.exchange,
+            self.channel.basic_publish(exchange=self.exchange,
                     routing_key=self.routing_key,
                     body=message)
 

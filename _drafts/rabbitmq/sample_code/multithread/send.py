@@ -19,7 +19,7 @@ class Sender(Thread):
         self.routing_key = routing_key
 
         self.channel = self.connection.channel()
-	self.channel.exchange_declare(self.exchange)
+        self.channel.exchange_declare(self.exchange)
 
     def run(self):
         self.log("Starts sending message!")
@@ -36,11 +36,11 @@ class Sender(Thread):
     def log(self, message):
         print "[Sender-%i]\t %s" % (self.id, message)
 
-sender = Sender(1, connection, exchange, routing_key)
+for i in range(100):
+    sender = Sender(1, connection, exchange, routing_key)
 
-sender.start()
-
-sender.join()
+    sender.start()
+    sender.join()
 
 connection.close()
 

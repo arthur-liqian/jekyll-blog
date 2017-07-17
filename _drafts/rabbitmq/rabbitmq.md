@@ -137,3 +137,19 @@ an exchange could be bind to several queues.
     processed successfully. Otherwise, the server stores the message 
     consistently.
 
+# TODO
+ - the different type of exchange, fanout, direct, etc.
+ - the projection between exchange and queue 
+    - one exchange to multipule queues
+    - multiple exchange to one queue
+    - multiple exchange to multiple queue
+- message ackownledge
+    - suceeded
+    - failed
+    - cancel
+    - timeout
+- message life cycle and status 
+- performance
+    - sending and receiving latency
+    - message size
+    - concurrency

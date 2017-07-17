@@ -37,7 +37,7 @@ class Sender(Thread):
         print "[Sender-%i]\t %s" % (self.id, message)
 
 for i in range(100):
-    sender = Sender(1, connection, exchange, routing_key)
+    sender = Sender(i, connection, exchange, routing_key)
 
     sender.start()
     sender.join()

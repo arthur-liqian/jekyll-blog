@@ -120,3 +120,20 @@ The code receives and consumes message:
     print "Waiting for messages."
     
     channel.start_consuming()
+
+# exchange binding
+
+an exchange could be bind to several queues.
+
+- BlockingConnection class has serveral limitations. The channel object
+    obtained from a BlockingConnection has a method `start_consuming`. This 
+    method must be called, otherwise the message wouldn't be consumed. And
+    this method blocks the current process/thread executing, and it doesn't 
+    response to the thread interruption signal well. As a result, it is not 
+    practical to use `BlockingConnection` class in multithreading.
+
+- By default, the `no_ack` parameter of method `basic_consume` is `False`. That
+    means a consumer should acknowledge the server the message has been 
+    processed successfully. Otherwise, the server stores the message 
+    consistently.
+

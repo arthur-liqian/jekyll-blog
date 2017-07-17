@@ -148,6 +148,11 @@ an exchange could be bind to several queues.
     - failed
     - cancel
     - timeout
+- asynchronized message processing
+    - SelectConnection
+- exchange and queue definition between sender and receiver
+    - the exchange's type can't be changed after declaration. how to make sender
+    and receiver won't conflict with each other
 - message life cycle and status 
 - performance
     - sending and receiving latency

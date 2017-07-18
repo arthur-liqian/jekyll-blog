@@ -137,11 +137,14 @@ an exchange could be bind to several queues.
     processed successfully. Otherwise, the server stores the message 
     consistently.
 
+# multiple consumers share one queue
+
+- the messages will be equally splited to all of the consumers
+
 # TODO
 - the order of exchange and queue declaration
     - what will happen if queue is declared before exchange, and being bound to
         the exchange
-- multiple consumers share one queue
 - the different type of exchange, fanout, direct, etc.
     - there are 2 mandatory exchange types:
         - direct

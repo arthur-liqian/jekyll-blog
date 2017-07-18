@@ -8,9 +8,10 @@ connection = BlockingConnection(ConnectionParameters('localhost'))
 channel = connection.channel()
 
 channel.exchange_declare(exchange=exchange_name, type='fanout')
-queue_name = channel.queue_declare()
+queue_declaring_result = channel.queue_declare()
+queue_name = queue_declaring_result.method.queue
 
-channel.qeueu_bind(exchange=exchange_name, qeueu=queue_name)
+channel.queue_bind(exchange=exchange_name, queue=queue_name)
 
 def callback(channel, method, properties, body):
     print "[%s]\tReceived Message: %s" % (queue_name, body)

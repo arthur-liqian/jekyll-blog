@@ -143,6 +143,8 @@ an exchange could be bind to several queues.
     consumers
 - the logic won't be impacted by the type of exchange
 
+# default exchange
+
 # TODO
 - the order of exchange and queue declaration
     - what will happen if queue is declared before exchange, and being bound to
@@ -150,6 +152,9 @@ an exchange could be bind to several queues.
 - the different type of exchange, fanout, direct, etc.
     - there are 2 mandatory exchange types:
         - direct
+            - by default, when no exchange is declared explicitly, the nameless 
+                exchange will be used. In such scenario, the queue name will be 
+                used as routing key in binding.
 
             
 
@@ -164,6 +169,9 @@ an exchange could be bind to several queues.
     - routing key works on the binding between exchange and queue, so all of the
         consumers of one queue shares the same routing key
     - routing key works with exchange type
+    - A queue Q is bound with an exchange E without routing key. If a message M
+        is sent to exchange E with routing key K, will queue Q receive the
+        message M?
 - message ackownledge
     - suceeded
     - failed

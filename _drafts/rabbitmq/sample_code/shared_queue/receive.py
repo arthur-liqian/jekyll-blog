@@ -21,6 +21,5 @@ def callback(channel, method, properties, body):
 
 channel.basic_consume(callback, queue=queue_name, no_ack=True)
 
-
 print "[Receiver-%i]\tWaiting for message." % receiver_id
 channel.start_consuming()

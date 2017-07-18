@@ -5,7 +5,6 @@ import sys
 from pika import BlockingConnection, ConnectionParameters
 
 EXCHANGE_NAME = 'channel_binding_exchange'
-QUEUE_NAME = 'channel_binding_queue'
 
 connection = BlockingConnection(ConnectionParameters('localhost'))
 
@@ -20,15 +19,17 @@ class Receiver(object):
         self.channel = self.connection.channel()
 
         self.channel.exchange_declare(EXCHANGE_NAME)
-        self.channel.queue_declare(queue=QUEUE_NAME)
+        result = self.channel.queue_declare()
+
+        self.queue_name = result.method.queue
 
         self.channel.queue_bind(exchange=EXCHANGE_NAME,
-                queue=QUEUE_NAME,
+                queue=self.queue_name,
                 routing_key=routing_key)
 
     def start(self):
         self.channel.basic_consume(self.on_message,
-                queue=QUEUE_NAME,
+                queue=self.queue_name,
                 no_ack=True)
 
         self.log("Start Consuming message")
@@ -38,9 +39,10 @@ class Receiver(object):
         self.log(body)
 
     def log(self, message):
-        log("Reciever-%i" % self.id, message)
+        log("Reciever-%s" % self.id, message)
 
-routing_key = sys.argv[1]
+receiver_id = sys.argv[1]
+routing_key = sys.argv[2]
 
-receiver = Receiver(1, connection)
+receiver = Receiver(receiver_id, connection, routing_key)
 receiver.start()

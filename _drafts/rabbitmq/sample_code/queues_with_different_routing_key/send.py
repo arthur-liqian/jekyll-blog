@@ -32,7 +32,7 @@ class Sender(Thread):
                     routing_key=routing_key, 
                     body='Message-%i from sender-%i with routing key %s'
                             % (i, self.id, routing_key))
-            self.log("Sent message-%i with routing key $s" % (i, routing_key))
+            self.log("Sent message-%i with routing key %s" % (i, routing_key))
         
         self.log("Finish sending message!")
     

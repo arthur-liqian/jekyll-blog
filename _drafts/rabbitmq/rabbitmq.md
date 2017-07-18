@@ -145,6 +145,19 @@ an exchange could be bind to several queues.
 
 # default exchange
 
+- A qeueu without public name can be used to receive message, when no exchange
+    is explicitly declared. The exchange name parameter should be an empty
+    string when `basic_publish` method is called, in that case. And receiver
+    MUST NOT bind the queue to the default nameless exchange. That operation
+    would cause an ACCESS_REFUSED error. When default exchange is used, the
+    queue name is always used as routing key in the implicit queue binding. As
+    a result, sender MUST always use target queue name as routing key when
+    publish a message. Then the recommended practice is the queue name should 
+    always be used as routing key to publish message, if no specific routing
+    logic is employed. 
+
+- the nameless default exchange is a direct exchange
+
 # TODO
 - the order of exchange and queue declaration
     - what will happen if queue is declared before exchange, and being bound to
@@ -152,9 +165,6 @@ an exchange could be bind to several queues.
 - the different type of exchange, fanout, direct, etc.
     - there are 2 mandatory exchange types:
         - direct
-            - by default, when no exchange is declared explicitly, the nameless 
-                exchange will be used. In such scenario, the queue name will be 
-                used as routing key in binding.
 
             
 

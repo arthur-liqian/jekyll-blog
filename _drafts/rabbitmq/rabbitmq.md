@@ -138,11 +138,27 @@ an exchange could be bind to several queues.
     consistently.
 
 # TODO
- - the different type of exchange, fanout, direct, etc.
- - the projection between exchange and queue 
+- the order of exchange and queue declaration
+    - what will happen if queue is declared before exchange, and being bound to
+        the exchange
+- multiple consumers share one queue
+- the different type of exchange, fanout, direct, etc.
+    - there are 2 mandatory exchange types:
+        - direct
+
+            
+
+        - fanout
+- the projection between exchange and queue 
     - one exchange to multipule queues
     - multiple exchange to one queue
     - multiple exchange to multiple queue
+    - a pair of exchange and queue has multiple binding which have different
+        routing keys
+- routing key
+    - routing key works on the binding between exchange and queue, so all of the
+        consumers of one queue shares the same routing key
+    - routing key works with exchange type
 - message ackownledge
     - suceeded
     - failed

@@ -171,6 +171,11 @@ an exchange could be bind to several queues.
         - fanout
 - the projection between exchange and queue 
     - one exchange to multipule queues
+        - direct
+            - one exchange is bound to different queues with different routing
+                keys
+        - fanout
+            - routing key would be ignored?
     - multiple exchange to one queue
     - multiple exchange to multiple queue
     - a pair of exchange and queue has multiple binding which have different

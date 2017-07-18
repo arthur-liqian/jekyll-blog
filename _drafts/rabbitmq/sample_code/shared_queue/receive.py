@@ -16,10 +16,15 @@ channel.queue_declare(queue=queue_name)
 channel.queue_bind(exchange=exchange_name, queue=queue_name, routing_key='')
 
 def callback(channel, method, properties, body):
-    print "[Receiver-%i]\tReceived %s" % (receiver_id, body)
+    print "[Receiver-%s]\tReceived %s" % (receiver_id, body)
 
 
 channel.basic_consume(callback, queue=queue_name, no_ack=True)
 
+<<<<<<< HEAD
 print "[Receiver-%i]\tWaiting for message." % receiver_id
+=======
+
+print "[Receiver-%s]\tWaiting for message." % receiver_id
+>>>>>>> ff80b08b32aed86fdfcee61b208e0352c0cb4e1c
 channel.start_consuming()

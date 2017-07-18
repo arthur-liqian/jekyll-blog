@@ -139,7 +139,9 @@ an exchange could be bind to several queues.
 
 # multiple consumers share one queue
 
-- the messages will be equally splited to all of the consumers
+- the messages will be equally splited to all of the consumersed to all of the
+    consumers
+- the logic won't be impacted by the type of exchange
 
 # TODO
 - the order of exchange and queue declaration

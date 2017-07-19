@@ -200,6 +200,11 @@ will also receive the message with the new routing key.
         - fanout
 - the projection between exchange and queue 
 - routing key
+- queue
+    - persistency type
+        - durable
+        - temporary
+        - auto-deleted
 - message ackownledge
     - suceeded
     - failed

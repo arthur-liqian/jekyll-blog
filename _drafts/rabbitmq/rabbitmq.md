@@ -169,6 +169,11 @@ an exchange could be bind to several queues.
             
 
         - fanout
+
+            According to the definition in the AMQP, fanout exchange ignores the
+            routing key. This constraint should be verified first. That
+            determines whether the routing key behaviors should be checked on
+            a fanout exchange.
 - the projection between exchange and queue 
     - one exchange to multipule queues
         - direct

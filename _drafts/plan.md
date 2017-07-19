@@ -178,3 +178,21 @@ availability bottle neck of the system emmploying it.
 - Other messaging protocol, such as [STOMP](https://stomp.github.io/), 
     [MQTT](http://mqtt.org/)
 - SELinux
+
+# Technical Solutions
+
+## Planning Task
+
+### GPGPU
+
+#### Priority
+
+__**Media**__
+
+#### Status
+
+- __**Pending**__ OpenCL
+
+#### Related Task
+
+- GPGPU Database 

@@ -46,7 +46,7 @@ class Receiver(object):
         log("Reciever-%s" % self.id, message)
 
 receiver_id = sys.argv[1]
-routing_key = sys.argv[2]
+routing_keys = sys.argv[2:]
 
-receiver = Receiver(receiver_id, connection, routing_key)
+receiver = Receiver(receiver_id, connection, routing_keys)
 receiver.start()

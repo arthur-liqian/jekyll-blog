@@ -10,7 +10,7 @@ channel = connection.channel()
 channel.exchange_declare(exchange=exchange_name, type='fanout')
 
 channel.basic_publish(exchange=exchange_name,
-        routing_key='fanout_routing_key'
+        routing_key='fanout_routing_key',
         body='Message from fanout exchange with routing key fanout_routing_key')
 
 print 'Sent message with routing key to a fanout exchange'

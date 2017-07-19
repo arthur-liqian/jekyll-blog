@@ -158,6 +158,13 @@ an exchange could be bind to several queues.
 
 - the nameless default exchange is a direct exchange
 
+# fanout exchange
+
+Fanout exchange always redirects all of the messages to all of the queues bound
+to it. The routing key in the binding, and the routing key associated to the
+message sent is always ignored. As a result, it is meanlingless to assign 
+routing key when fantout exchange is used.
+
 # TODO
 - the order of exchange and queue declaration
     - what will happen if queue is declared before exchange, and being bound to
@@ -170,17 +177,17 @@ an exchange could be bind to several queues.
 
         - fanout
 
-            According to the definition in the AMQP, fanout exchange ignores the
-            routing key. This constraint should be verified first. That
-            determines whether the routing key behaviors should be checked on
-            a fanout exchange.
+            DONE. According to the definition in the AMQP, fanout exchange
+            ignores the routing key. This constraint should be verified first.
+            That determines whether the routing key behaviors should be checked
+            on a fanout exchange.
 - the projection between exchange and queue 
     - one exchange to multipule queues
         - direct
-            - one exchange is bound to different queues with different routing
+            - DONE. one exchange is bound to different queues with different routing
                 keys
         - fanout
-            - routing key would be ignored?
+            - DONE. routing key is always ignored
     - multiple exchange to one queue
     - multiple exchange to multiple queue
     - a pair of exchange and queue has multiple binding which have different

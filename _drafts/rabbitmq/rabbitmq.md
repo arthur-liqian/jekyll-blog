@@ -165,6 +165,31 @@ to it. The routing key in the binding, and the routing key associated to the
 message sent is always ignored. As a result, it is meanlingless to assign 
 routing key when fantout exchange is used.
 
+# direct exchange
+
+direct change always dispatches messages to queues by routing keys.
+
+## multibinding
+
+one direct exchange could be bound to multiple queues. During binding, routing
+key is mandatory, and always used to filter the message to the queue. 
+
+when multiple queues are bound to one exchange,  different queues could share
+the same routing key. in such case, all of the queues whose bindings share the
+same routing key, would always get all of the message associate with that 
+routing key.
+
+one queue could also be bound to multiple exchanges, and receives all of the 
+messages from all of the bound exchanges, if the routing key matches the binding
+definition.
+
+one queue could also be bound to an exchange more than once. in that case, 
+each binding definition could be assigned with different routing keys. with 
+such kind of bindings, a queue could receive messages associated with more than
+one kind of routing keys from one exchange. that also means consequencial 
+binding definition doesn't overwrite the existing one. and the existing consumer
+will also receive the message with the new routing key.
+
 # TODO
 - the order of exchange and queue declaration
     - what will happen if queue is declared before exchange, and being bound to
@@ -172,33 +197,9 @@ routing key when fantout exchange is used.
 - the different type of exchange, fanout, direct, etc.
     - there are 2 mandatory exchange types:
         - direct
-
-            
-
         - fanout
-
-            DONE. According to the definition in the AMQP, fanout exchange
-            ignores the routing key. This constraint should be verified first.
-            That determines whether the routing key behaviors should be checked
-            on a fanout exchange.
 - the projection between exchange and queue 
-    - one exchange to multipule queues
-        - direct
-            - DONE. one exchange is bound to different queues with different routing
-                keys
-        - fanout
-            - DONE. routing key is always ignored
-    - multiple exchange to one queue
-    - multiple exchange to multiple queue
-    - a pair of exchange and queue has multiple binding which have different
-        routing keys
 - routing key
-    - routing key works on the binding between exchange and queue, so all of the
-        consumers of one queue shares the same routing key
-    - routing key works with exchange type
-    - A queue Q is bound with an exchange E without routing key. If a message M
-        is sent to exchange E with routing key K, will queue Q receive the
-        message M?
 - message ackownledge
     - suceeded
     - failed

@@ -1,6 +1,7 @@
 #! /use/bin/env python
 
 from threading import Thread
+from time import sleep
 from pika import BlockingConnection, ConnectionParameters
 
 EXCHANGE_NAME = 'multithread_receiver_exchange'
@@ -31,12 +32,16 @@ class Receiver(Thread):
                 routing_key=self.routing_key)
 
     def run(self):
-        self.basic_consume(self.on_message,
+        self.consumer_tag = self.basic_consume(self.on_message,
                 queue=self.queue,
                 no_ack=True)
         
         self.log("Start Consuming message!")
         self.channel.start_consume()
+
+    def stop(self):
+        self.channel.stop_consuming(self.consumer_tag)
+        self.log("Stop consuming message!")
 
     def on_message(self, ch, method, properties, body):
         self.log(body)
@@ -49,4 +54,12 @@ connection = BlockingConnection(ConnectionParameters('localhost'))
 receiver = Receiver(1, connection, EXCHANGE_NAME, QUEUE_NAME, ROUTING_KEY)
 
 receiver.start()
-receiver.join()
+
+try:
+    sleep(65535)
+except KeyboardInterrupt:
+    print 'The process is interrupted'
+    receiver.stop()
+    receiver.join()
+
+print "Receiver exits!"

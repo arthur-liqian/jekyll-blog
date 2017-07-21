@@ -26,17 +26,17 @@ class Receiver(Thread):
         self.channel.exchange_declare(exchange=self.exchange, type='direct')
         self.channel.queue_declare(queue=self.queue)
 
-        self.channel.queue_bind(exchange=self.exchange
+        self.channel.queue_bind(exchange=self.exchange,
                 queue=self.queue,
                 routing_key=self.routing_key)
 
     def run(self):
-        self.basic_consume(self.on_message,
+        self.channel.basic_consume(self.on_message,
                 queue=self.queue,
                 no_ack=True)
         
         self.log("Start Consuming message!")
-        self.channel.start_consume()
+        self.channel.start_consuming()
 
     def on_message(self, ch, method, properties, body):
         self.log(body)

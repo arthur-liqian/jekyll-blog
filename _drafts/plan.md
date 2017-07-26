@@ -196,3 +196,9 @@ __**Media**__
 #### Related Task
 
 - GPGPU Database 
+
+# Personal Project
+
+## Mind Map plugin for VSCode
+
+Rerferring to yUML plugin

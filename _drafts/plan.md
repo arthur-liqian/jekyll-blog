@@ -115,6 +115,18 @@ related material should be referred to in the future.
 
 None
 
+### UML
+
+Learning UML to improve system design skill.
+
+Reading [Unified Modeling Language User Guide](https://www.pearson.com/us/higher-education/product/Booch-Unified-Modeling-Language-User-Guide-The/9780201571684.html)
+
+Reading UML Reference Manual
+#### Priority
+
+__**High**__
+
+
 # Infrastructure Design
 
 Infrastructure design covers the following topics:
@@ -143,6 +155,7 @@ database, message queue. They would be moved to a separated suject.
 
 - Read [Mastering RabbitMQ](https://www.packtpub.com/application-development/mastering-rabbitmq)
 - Go through [RabbitMQ Official Document](http://www.rabbitmq.com/documentation.html)
+- Refere to pika, the RabbitMQ python client doc https://pika.readthedocs.io/en/0.10.0/index.html 
 
 #### Priority
 

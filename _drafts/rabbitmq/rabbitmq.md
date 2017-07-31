@@ -190,6 +190,23 @@ one kind of routing keys from one exchange. that also means consequencial
 binding definition doesn't overwrite the existing one. and the existing consumer
 will also receive the message with the new routing key.
 
+# multithreading
+
+## BlockingConnection
+
+- `BlockingConnection` object always employs `BlockingChannel` class to handle
+    the channel logic.
+- `BlockingChannel` object always blocks on `startConsuming` method, which
+    actually blocks on `BlockingConnection`'s `__flush_output` method. 
+    `__flush_output` method always loop the socket connection to get the 
+    incomming message, until the speific condition is met.
+- According to the interface doc, `BlockingChannel`'s `stopConsuming` method
+    cancels all of the consumers registered on the current channel, and notify
+    the `start_consuming` method to exit the blocking loop. However, the 
+    `start_consuming` method still blocks, after the `stop_consuming` is 
+    called. The `start_consuming` loop stopping condition should be 
+    clearified.
+
 # TODO
 - the order of exchange and queue declaration
     - what will happen if queue is declared before exchange, and being bound to

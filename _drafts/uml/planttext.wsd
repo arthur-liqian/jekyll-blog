@@ -1,0 +1,110 @@
+@startuml
+together {
+    class HelloWorld {
+        paint()
+    }
+
+    class Applet
+
+    class Panel
+
+    class Container
+
+    class Component
+
+    class Object
+
+    class Graphics
+
+    Applet <|-- HelloWorld
+
+    Panel <|-- Applet
+
+    Container <|-- Panel
+
+    Component <|-- Container
+
+
+    Object <|-- Component
+}
+HelloWorld ..> Graphics
+ImageObserver ()-- Component
+@enduml
+
+@startuml
+allow_mixing
+
+class HelloWorld
+package java {
+
+    package lang
+
+    package awt
+
+    awt ..> lang
+
+    package applet
+
+    applet ..> awt
+}
+
+HelloWorld ..> applet
+
+@enduml
+
+@startuml
+[-> "root:Thread": run
+
+activate "root:Thread"
+
+    "root:Thread" -> ":Toolkit": run
+
+    activate ":Toolkit"
+
+        ":Toolkit" -> ":Toolkit": callbackLoop
+        activate ":Toolkit"
+
+            ":Toolkit" -> ":ComponentPeer": handleExpose
+            activate ":ComponentPeer"
+
+                ":ComponentPeer" -> "target:HelloWorld": paint
+                activate "target:HelloWorld"
+                deactivate "target:HelloWorld"
+
+            deactivate ":ComponentPeer"
+
+        deactivate ":Toolkit"
+
+    deactivate ":Toolkit"
+
+[<- "root:Thread"
+deactivate "root:Thread"
+@enduml
+
+@startuml
+package testPackage <<Rectangle>> {
+
+}
+@enduml
+
+@startuml
+digraph G {
+    Hello -> World
+}
+
+class A
+@enduml
+
+@startuml
+class Foo {
+    foo
+    bar()
+}
+note left
+another note
+end note 
+note bottom of Foo
+This is the description of the class Foo
+end note
+@enduml
+

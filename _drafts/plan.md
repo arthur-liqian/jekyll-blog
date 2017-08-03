@@ -126,6 +126,18 @@ Reading UML Reference Manual
 
 __**High**__
 
+#### Related Task
+
+- [CRC Card modeling](http://agilemodeling.com/artifacts/crcModel.htm), and 
+    [wiki](https://en.wikipedia.org/wiki/Class-responsibility-collaboration_card)
+- [Object-Oriented Design](https://en.wikipedia.org/wiki/Object-oriented_design)
+- [Metamodeling](https://en.wikipedia.org/wiki/Metamodeling)
+- [Story-Drive Modeling](https://en.wikipedia.org/wiki/Metamodeling)
+- Reading _Disciplined Agile Delivery: A Practitionor's Guide to Agile Software 
+    Delivery in the Enterprise_
+- Reading _The Object Primer 3rd Edition: Agile Model Driven Development with 
+    UML 2_
+- (Liskov Substitution Principle)[https://en.wikipedia.org/wiki/Liskov_substitution_principle]
 
 # Infrastructure Design
 
